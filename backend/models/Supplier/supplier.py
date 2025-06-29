@@ -17,6 +17,7 @@ class Supplier(db.Model, SerializerMixin):
     stock = db.Column(db.Boolean, default=False)
     utility = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now(), server_default=db.func.now())
 
     def __repr__(self):
         return f'<Supplier {self.supplier_name}>'
