@@ -4,10 +4,10 @@ from models.Supplier import Invoice
 
 #create a new supplier
 def create_supplier(data):
-    new_supplier = Supplier(**data)
-    db.session.add(new_supplier)
+    #new_supplier = Supplier(**data)
+    db.session.add(data)
     db.session.commit()
-    return new_supplier
+    return data
 
 #read- get all suppliers
 def get_all_suppliers():
@@ -34,7 +34,7 @@ def update_supplier(supplier, data):
         setattr(supplier, key, value)
     db.session.commit()
     return supplier
-    
+
 #delete a supplier
 def delete_supplier(supplier):
     db.session.delete(supplier)

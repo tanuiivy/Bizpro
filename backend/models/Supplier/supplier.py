@@ -13,6 +13,7 @@ class Supplier(db.Model, SerializerMixin):
     contact_person = db.Column(db.String(100), nullable=False)
     contact_person_no = db.Column(db.String(10), nullable=False)
     package_mode = db.Column(db.Text)
+    #checkboxes
     vat = db.Column(db.Boolean, default=False)
     stock = db.Column(db.Boolean, default=False)
     utility = db.Column(db.Boolean, default=False)

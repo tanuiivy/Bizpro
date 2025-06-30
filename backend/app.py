@@ -5,6 +5,7 @@ from extensions import db, migrate, bcrypt, jwt, ma, cors
 #Models
 from models.user import User
 from models.Supplier import Supplier, Invoice, Payment, SupplierPosting
+from models.Stock import *
 
 def create_app():
     app = Flask(__name__)

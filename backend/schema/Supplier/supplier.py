@@ -5,7 +5,7 @@ from models.Supplier import Supplier, Invoice, Payment, SupplierPosting
 class SupplierSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Supplier
-        load_instance = True
+        load_instance = False
 
     supplier_id = ma.auto_field()
     image_path = ma.auto_field()
@@ -27,7 +27,7 @@ class SupplierSchema(ma.SQLAlchemySchema):
 class InvoiceSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Invoice
-        load_instance = True
+        load_instance = False
 
     invoice_id = ma.auto_field()
     supplier_id = ma.auto_field()
@@ -41,7 +41,7 @@ class InvoiceSchema(ma.SQLAlchemySchema):
 class PaymentSchema(ma.SQLAlchemySchema):
     class Meta:
         model = Payment
-        load_instance = True
+        load_instance = False
 
     id = ma.auto_field()
     supplier_id = ma.auto_field()
@@ -54,7 +54,7 @@ class PaymentSchema(ma.SQLAlchemySchema):
 class SupplierPostingSchema(ma.SQLAlchemySchema):
     class Meta:
         model = SupplierPosting
-        load_instance = True
+        load_instance = False
 
     posting_id = ma.auto_field()
     supplier_id = ma.auto_field()
