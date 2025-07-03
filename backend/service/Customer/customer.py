@@ -1,6 +1,5 @@
 from extensions import db
 from models.Customer.customer import Customer
-from 
 
 # Create a customer
 def create_customer(company_id, fullname, email=None, phone=None, purchase_type="retail", payment_method="cash"):

@@ -58,6 +58,8 @@ class SupplierPostingSchema(ma.SQLAlchemySchema):
 
     posting_id = ma.auto_field()
     supplier_id = ma.auto_field()
+    product_id = ma.auto_field()
+    company_id = ma.auto_field()
     amount = ma.auto_field()
     description = ma.auto_field()
     posting_date = ma.auto_field()

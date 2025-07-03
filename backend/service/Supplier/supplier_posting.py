@@ -20,6 +20,14 @@ def get_supplier_posting_by_id(posting_id):
 def get_postings_by_supplier(supplier_id):
     return SupplierPosting.query.filter_by(supplier_id=supplier_id).all()
 
+#read- get postings by product id
+def get_postings_by_product(product_id):
+    return SupplierPosting.query.filter_by(product_id=product_id).all()
+    
+#read- get postings by company id
+def get_postings_by_company(company_id):
+    return SupplierPosting.query.filter_by(company_id=company_id).all()
+
 #update a supplier posting
 def update_supplier_posting(posting, data):
     for key, value in data.items():

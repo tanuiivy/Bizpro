@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from schema.Customer import PaymentFormSchema
-from service.Customer.payment_service import (
+from service.Customer.payment import (
     create_payment,
     get_all_payments,
     get_payment_by_id,
@@ -15,7 +15,7 @@ from service.Customer.payment_service import (
 payment_schema = PaymentFormSchema()
 payments_schema = PaymentFormSchema(many=True)
 
-class PaymentListResource(Resource):
+class CustomerPaymentListResource(Resource):
     def post(self):
         data = request.get_json()
         payment = create_payment(
@@ -34,7 +34,7 @@ class PaymentListResource(Resource):
         payments = get_all_payments()
         return payments_schema.dump(payments), 200
 
-class PaymentResource(Resource):
+class CustomerPaymentResource(Resource):
     def get(self, payment_id):
         payment = get_payment_by_id(payment_id)
         if not payment:

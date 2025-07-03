@@ -26,9 +26,10 @@ def create_app():
     #supplier resources
     from resource.Supplier.supplier import SupplierListResource, SupplierResource, SupplierRecentResource
     from resource.Supplier.invoice import InvoiceListResource, InvoiceResource
-    from resource.Supplier.payment import PaymentListResource, PaymentResource
-    from resource.Supplier.supplier_posting import SupplierPostingListResource, SupplierPostingResource
+    from resource.Supplier.payment import SupplierPaymentListResource, SupplierPaymentResource
+    from resource.Supplier.supplier_posting import SupplierPostingListResource, SupplierPostingResource, SupplierPostingsByProductResource, SupplierPostingsByCompanyResource
     from resource.Supplier.analytics import SupplierDashboardOverviewResource, RecentOrdersResource, SupplierPaymentSummaryResource
+
     #stock resources
     from resource.Stock.company import CompanyListResource, CompanyResource, CompanyByNameResource
     from resource.Stock.conversion import ConversionListResource, ConversionResource
@@ -36,8 +37,13 @@ def create_app():
     from resource.Stock.reference import CategoryListResource, CategoryByProductResource, SubCategoryListResource, SubCategoryByProductResource, ShopListResource, ShopByProductResource, StoreListResource, StoreByProductResource, ShelfListResource, ShelfByProductResource, PackageModeListResource, PackageModeByProductResource
     from resource.Stock.transfer import TransferListResource, TransferResource, TransfersByProductResource, TransfersByStatusResource
     from resource.Stock.write_off import WriteOffListResource, WriteOffResource, WriteOffsByProductResource
-    from resource.Stock.analytics import TotalCompaniesResource, TotalProductsResource, TotalTransfersResource, PendingTransfersResource, TotalWriteOffsResource
+    from resource.Stock.analytics import TotalCompaniesResource, TotalProductsResource, TotalTransfersResource, PendingTransfersResource, TotalWriteOffsResource, CustomersPerCompanyResource, CustomersPerProductResource
 
+    #customer resources
+    from resource.Customer.customer import CustomerListResource, CustomerResource, CustomersByCompanyResource, CustomersByPaymentMethodResource, CustomersByPurchaseTypeResource
+    from resource.Customer.customerposting import CustomerPostingListResource, CustomerPostingResource, CustomerPostingsByCustomerResource, CustomerPostingsByCompanyResource
+    from resource.Customer.payment import CustomerPaymentListResource, CustomerPaymentResource, PaymentsByCustomerResource, PaymentsByCompanyResource
+    from resource.Customer.analytics import TotalCustomerRevenueResource, PendingPaymentsResource, TotalPostingsResource, TotalCustomersResource, TopCompanyPerCustomerResource, TopProductPerCustomerResource
 
     #---------------------------------------Supplier-----------------------------------------------------#
     #supplier endpoints
@@ -50,12 +56,14 @@ def create_app():
     api.add_resource(InvoiceResource, '/invoices/<int:invoice_id>')
 
     #payment endpoints
-    api.add_resource(PaymentListResource, '/payments')
-    api.add_resource(PaymentResource, '/payments/<int:payment_id>')
+    api.add_resource(SupplierPaymentListResource, '/payments')
+    api.add_resource(SupplierPaymentResource, '/payments/<int:payment_id>')
 
     #supplier Posting endpoints
     api.add_resource(SupplierPostingListResource, '/supplier_postings')
     api.add_resource(SupplierPostingResource, '/supplier_postings/<int:posting_id>')
+    api.add_resource(SupplierPostingsByProductResource, '/supplier_postings/product/<int:product_id>')
+    api.add_resource(SupplierPostingsByCompanyResource, '/supplier_postings/company/<int:company_id>')
 
     #supplier analytics
     api.add_resource(SupplierDashboardOverviewResource, '/suppliers/overview')
@@ -114,6 +122,9 @@ def create_app():
     api.add_resource(TotalTransfersResource, "/analytics/total_transfers")
     api.add_resource(PendingTransfersResource, "/analytics/pending_transfers")
     api.add_resource(TotalWriteOffsResource, "/analytics/total_write_offs")
+    api.add_resource(CustomersPerCompanyResource, "/analytics/customers_per_company")
+    api.add_resource(CustomersPerProductResource, "/analytics/customers_per_product")
+
 
 #---------------------------------------Stock-----------------------------------------------------#
     #customer endpoints
@@ -129,17 +140,19 @@ def create_app():
     api.add_resource(CustomerPostingsByCustomerResource, "/customer_postings/customer/<int:customer_id>")
     api.add_resource(CustomerPostingsByCompanyResource, "/customer_postings/company/<int:company_id>")
 
-    # Payment endpoints
-    api.add_resource(PaymentListResource, "/payments")
-    api.add_resource(PaymentResource, "/payments/<int:payment_id>")
+    #payment endpoints
+    api.add_resource(CustomerPaymentListResource, "/payments")
+    api.add_resource(CustomerPaymentResource, "/payments/<int:payment_id>")
     api.add_resource(PaymentsByCustomerResource, "/payments/customer/<int:customer_id>")
     api.add_resource(PaymentsByCompanyResource, "/payments/company/<int:company_id>")
 
-
-
-
-
-
+    #customer analytics
+    api.add_resource(TotalCustomerRevenueResource, "/customer-analytics/total-revenue")
+    api.add_resource(PendingPaymentsResource, "/customer-analytics/pending-payments")
+    api.add_resource(TotalPostingsResource, "/customer-analytics/total-postings")
+    api.add_resource(TotalCustomersResource, "/customer-analytics/total-customers")
+    api.add_resource(TopCompanyPerCustomerResource, "/customer-analytics/top-company")
+    api.add_resource(TopProductPerCustomerResource, "/customer-analytics/top-product")
 
     @app.route('/')
     def home():

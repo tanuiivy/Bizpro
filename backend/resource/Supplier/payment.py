@@ -14,7 +14,7 @@ payment_schema = PaymentSchema()
 payments_schema = PaymentSchema(many=True)
 
 #payment list
-class PaymentListResource(Resource):
+class SupplierPaymentListResource(Resource):
     def post(self):
         json_data = request.get_json()
         data = payment_schema.load(json_data)
@@ -29,7 +29,7 @@ class PaymentListResource(Resource):
             payments = get_all_payments()
         return payments_schema.dump(payments), 200
 #payment by ID
-class PaymentResource(Resource):
+class SupplierPaymentResource(Resource):
     def get(self, payment_id):
         payment = get_payment_by_id(payment_id)
         return payment_schema.dump(payment), 200

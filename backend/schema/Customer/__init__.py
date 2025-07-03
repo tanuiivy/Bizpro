@@ -1,4 +1,4 @@
-from .Customer import (
+from .customer import (
     CustomerSchema, 
     CustomerPostingSchema, 
     PaymentFormSchema

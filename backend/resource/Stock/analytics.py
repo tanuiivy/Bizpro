@@ -4,7 +4,9 @@ from service.Stock.analytics import (
     get_total_products,
     get_total_transfers,
     get_pending_transfers,
-    get_total_write_offs
+    get_total_write_offs,
+    get_customers_per_company,
+    get_customers_per_product
 )
 
 class TotalCompaniesResource(Resource):
@@ -26,3 +28,13 @@ class PendingTransfersResource(Resource):
 class TotalWriteOffsResource(Resource):
     def get(self):
         return {"total_write_offs": get_total_write_offs()}, 200
+
+class CustomersPerCompanyResource(Resource):
+    def get(self):
+        data = get_customers_per_company()
+        return {"customers_per_company": data}, 200
+
+class CustomersPerProductResource(Resource):
+    def get(self):
+        data = get_customers_per_product()
+        return {"customers_per_product": data}, 200

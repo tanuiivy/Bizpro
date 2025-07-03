@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from schema.Customer import CustomerSchema
-from service.Customer.customer_service import (
+from service.Customer.customer import (
     create_customer,
     get_all_customers,
     get_customer_by_id,
