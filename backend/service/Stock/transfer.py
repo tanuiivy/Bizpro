@@ -19,18 +19,14 @@ def create_transfer(product_id, transfer_quantity, from_location, to_location, r
     db.session.commit()
     return new_transfer
 
-
 def get_transfer_by_id(transfer_id):
     return ProductTransfer.query.get(transfer_id)
-
 
 def get_all_transfers():
     return ProductTransfer.query.all()
 
-
 def get_transfers_by_product_id(product_id):
     return ProductTransfer.query.filter_by(product_id=product_id).all()
-
 
 def update_transfer(transfer_id, transfer_quantity=None, from_location=None, to_location=None, remarks=None):
     transfer = ProductTransfer.query.get(transfer_id)
@@ -45,7 +41,6 @@ def update_transfer(transfer_id, transfer_quantity=None, from_location=None, to_
         transfer.to_location = to_location
     if remarks is not None:
         transfer.remarks = remarks
-
     db.session.commit()
     return transfer
 

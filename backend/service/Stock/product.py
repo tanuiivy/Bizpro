@@ -39,6 +39,9 @@ def get_all_products():
 def get_product_by_id(product_id):
     return Product.query.get(product_id)
 
+def get_product_by_name(name):
+    return Product.query.filter_by(product_name=name).first()
+
 # Update product by ID
 def update_product(product_id, data):
     product = Product.query.get(product_id)

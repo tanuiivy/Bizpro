@@ -4,6 +4,7 @@ from models.Stock.reference import (
 )
 from extensions import db
 
+# package mode
 def create_package_mode(package_mode_name):
     new_mode = PackageMode(package_mode=package_mode_name)
     db.session.add(new_mode)
@@ -35,7 +36,7 @@ def remove_package_mode_from_product(product_id):
     db.session.commit()
     return product
 
-
+# category
 def create_category(category_name):
     new_category = ProductCategory(product_category=category_name)
     db.session.add(new_category)
@@ -67,7 +68,7 @@ def remove_category_from_product(product_id):
     db.session.commit()
     return product
 
-
+# sub-category
 def create_sub_category(sub_category_name):
     new_sub = ProductSubCategory(product_sub_category=sub_category_name)
     db.session.add(new_sub)
@@ -99,7 +100,7 @@ def remove_sub_category_from_product(product_id):
     db.session.commit()
     return product
 
-
+# shop
 def create_shop(shop_name, company_id=None):
     new_shop = Shop(shop_name=shop_name, company_id=company_id)
     db.session.add(new_shop)
@@ -131,7 +132,7 @@ def remove_shop_from_product(product_id):
     db.session.commit()
     return product
 
-
+# store
 def create_store(store_name, company_id):
     new_store = Store(store_name=store_name, company_id=company_id)
     db.session.add(new_store)
@@ -163,10 +164,7 @@ def remove_store_from_product(product_id):
     db.session.commit()
     return product
 
-# ====================================================
-# 🔹 SHELF
-# ====================================================
-
+# shelf
 def create_shelf(shelf_name, store_id):
     new_shelf = Shelf(shelf_name=shelf_name, store_id=store_id)
     db.session.add(new_shelf)

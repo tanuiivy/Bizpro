@@ -1,4 +1,4 @@
-from .schema import (
+from .stock import (
     CompanySchema,
     ProductSchema,
     ProductCategorySchema,
