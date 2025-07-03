@@ -5,6 +5,7 @@ from extensions import db, migrate, bcrypt, jwt, ma, cors
 #Models
 from models.Supplier import *
 from models.Stock import *
+from models.Customer import *
 
 def create_app():
     app = Flask(__name__)
@@ -35,7 +36,7 @@ def create_app():
     from resource.Stock.reference import CategoryListResource, CategoryByProductResource, SubCategoryListResource, SubCategoryByProductResource, ShopListResource, ShopByProductResource, StoreListResource, StoreByProductResource, ShelfListResource, ShelfByProductResource, PackageModeListResource, PackageModeByProductResource
     from resource.Stock.transfer import TransferListResource, TransferResource, TransfersByProductResource, TransfersByStatusResource
     from resource.Stock.write_off import WriteOffListResource, WriteOffResource, WriteOffsByProductResource
-    from resource.Stock.analytics import TotalCompaniesResource, TotalProductsResource, TotalTransfersResource, PendingTransfersResource, TotalWriteOffsResource, AnalyticsOverviewResource
+    from resource.Stock.analytics import TotalCompaniesResource, TotalProductsResource, TotalTransfersResource, PendingTransfersResource, TotalWriteOffsResource
 
 
     #---------------------------------------Supplier-----------------------------------------------------#
@@ -110,6 +111,7 @@ def create_app():
     #analytics endpoints
     api.add_resource(TotalCompaniesResource, "/analytics/total_companies")
     api.add_resource(TotalProductsResource, "/analytics/total_products")
+    api.add_resource(TotalTransfersResource, "/analytics/total_transfers")
     api.add_resource(PendingTransfersResource, "/analytics/pending_transfers")
     api.add_resource(TotalWriteOffsResource, "/analytics/total_write_offs")
 

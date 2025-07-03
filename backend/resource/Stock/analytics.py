@@ -1,7 +1,8 @@
 from flask_restful import Resource
-from service.Supplier.analytics import (
+from service.Stock.analytics import (
     get_total_companies,
     get_total_products,
+    get_total_transfers,
     get_pending_transfers,
     get_total_write_offs
 )
@@ -13,6 +14,10 @@ class TotalCompaniesResource(Resource):
 class TotalProductsResource(Resource):
     def get(self):
         return {"total_products": get_total_products()}, 200
+
+class TotalTransfersResource(Resource):
+    def get(self):
+        return {"total_transfers": get_total_transfers()}, 200
 
 class PendingTransfersResource(Resource):
     def get(self):
