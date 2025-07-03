@@ -115,6 +115,29 @@ def create_app():
     api.add_resource(PendingTransfersResource, "/analytics/pending_transfers")
     api.add_resource(TotalWriteOffsResource, "/analytics/total_write_offs")
 
+#---------------------------------------Stock-----------------------------------------------------#
+    #customer endpoints
+    api.add_resource(CustomerListResource, "/customers")
+    api.add_resource(CustomerResource, "/customers/<int:customer_id>")
+    api.add_resource(CustomersByCompanyResource, "/customers/company/<int:company_id>")
+    api.add_resource(CustomersByPaymentMethodResource, "/customers/payment_method/<string:payment_method>")
+    api.add_resource(CustomersByPurchaseTypeResource, "/customers/purchase_type/<string:purchase_type>")
+
+    #customer posting endpoints
+    api.add_resource(CustomerPostingListResource, "/customer_postings")
+    api.add_resource(CustomerPostingResource, "/customer_postings/<int:posting_id>")
+    api.add_resource(CustomerPostingsByCustomerResource, "/customer_postings/customer/<int:customer_id>")
+    api.add_resource(CustomerPostingsByCompanyResource, "/customer_postings/company/<int:company_id>")
+
+    # Payment endpoints
+    api.add_resource(PaymentListResource, "/payments")
+    api.add_resource(PaymentResource, "/payments/<int:payment_id>")
+    api.add_resource(PaymentsByCustomerResource, "/payments/customer/<int:customer_id>")
+    api.add_resource(PaymentsByCompanyResource, "/payments/company/<int:company_id>")
+
+
+
+
 
 
 
