@@ -35,6 +35,7 @@ def create_app():
     from resource.Stock.reference import CategoryListResource, CategoryByProductResource, SubCategoryListResource, SubCategoryByProductResource, ShopListResource, ShopByProductResource, StoreListResource, StoreByProductResource, ShelfListResource, ShelfByProductResource, PackageModeListResource, PackageModeByProductResource
     from resource.Stock.transfer import TransferListResource, TransferResource, TransfersByProductResource, TransfersByStatusResource
     from resource.Stock.write_off import WriteOffListResource, WriteOffResource, WriteOffsByProductResource
+    from resource.Stock.analytics import TotalCompaniesResource, TotalProductsResource, TotalTransfersResource, PendingTransfersResource, TotalWriteOffsResource, AnalyticsOverviewResource
 
 
     #---------------------------------------Supplier-----------------------------------------------------#
@@ -101,11 +102,18 @@ def create_app():
     api.add_resource(TransfersByProductResource, "/transfers/product/<int:product_id>")
     api.add_resource(TransfersByStatusResource, "/transfers/status/<string:status>")
 
-
     #writeoffs endpoints
     api.add_resource(WriteOffListResource, "/write-offs")
     api.add_resource(WriteOffResource, "/write-offs/<int:write_off_id>")
     api.add_resource(WriteOffsByProductResource, "/write-offs/product/<int:product_id>")
+
+    #analytics endpoints
+    api.add_resource(TotalCompaniesResource, "/analytics/total_companies")
+    api.add_resource(TotalProductsResource, "/analytics/total_products")
+    api.add_resource(PendingTransfersResource, "/analytics/pending_transfers")
+    api.add_resource(TotalWriteOffsResource, "/analytics/total_write_offs")
+
+
 
 
     @app.route('/')
