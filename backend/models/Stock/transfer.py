@@ -1,4 +1,5 @@
 from extensions import db, SerializerMixin
+from sqlalchemy import Enum
 from datetime import datetime
 
 class ProductTransfer(db.Model, SerializerMixin):
@@ -10,6 +11,11 @@ class ProductTransfer(db.Model, SerializerMixin):
     from_location = db.Column(db.String(100), nullable=False) 
     to_location = db.Column(db.String(100), nullable=False) 
     remarks = db.Column(db.String(255), nullable=True)
+    status = db.Column(
+        Enum("pending", "completed", "canceled", name="transfer_status_enum"),
+        default="pending",
+        nullable=False
+    )
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

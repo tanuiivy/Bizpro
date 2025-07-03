@@ -33,7 +33,7 @@ def create_app():
     from resource.Stock.conversion import ConversionListResource, ConversionResource
     from resource.Stock.product import ProductListResource, ProductResource, ProductByNameResource
     from resource.Stock.reference import CategoryListResource, CategoryByProductResource, SubCategoryListResource, SubCategoryByProductResource, ShopListResource, ShopByProductResource, StoreListResource, StoreByProductResource, ShelfListResource, ShelfByProductResource, PackageModeListResource, PackageModeByProductResource
-    from resource.Stock.transfer import TransferListResource, TransferResource, TransfersByProductResource
+    from resource.Stock.transfer import TransferListResource, TransferResource, TransfersByProductResource, TransfersByStatusResource
     from resource.Stock.write_off import WriteOffListResource, WriteOffResource, WriteOffsByProductResource
 
 
@@ -99,6 +99,8 @@ def create_app():
     api.add_resource(TransferListResource, "/transfers")
     api.add_resource(TransferResource, "/transfers/<int:transfer_id>")
     api.add_resource(TransfersByProductResource, "/transfers/product/<int:product_id>")
+    api.add_resource(TransfersByStatusResource, "/transfers/status/<string:status>")
+
 
     #writeoffs endpoints
     api.add_resource(WriteOffListResource, "/write-offs")

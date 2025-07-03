@@ -5,6 +5,7 @@ from service.Stock.product import (
     create_product,
     get_all_products,
     get_product_by_id,
+    get_product_by_name,
     update_product,
     delete_product,
 )

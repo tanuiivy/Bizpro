@@ -2,7 +2,7 @@ from extensions import db
 from models.Stock.product import Product
 from models.Stock.transfer import ProductTransfer
 
-def create_transfer(product_id, transfer_quantity, from_location, to_location, remarks=None):
+def create_transfer(product_id, transfer_quantity, from_location, to_location,status="pending", remarks=None):
     # Check if product exists
     product = Product.query.get(product_id)
     if not product:
@@ -13,6 +13,7 @@ def create_transfer(product_id, transfer_quantity, from_location, to_location, r
         transfer_quantity=transfer_quantity,
         from_location=from_location,
         to_location=to_location,
+        status=status,
         remarks=remarks
     )
     db.session.add(new_transfer)
@@ -28,6 +29,9 @@ def get_all_transfers():
 def get_transfers_by_product_id(product_id):
     return ProductTransfer.query.filter_by(product_id=product_id).all()
 
+def get_transfers_by_status(status):
+    return ProductTransfer.query.filter_by(status=status).all()
+
 def update_transfer(transfer_id, transfer_quantity=None, from_location=None, to_location=None, remarks=None):
     transfer = ProductTransfer.query.get(transfer_id)
     if not transfer:
@@ -39,6 +43,8 @@ def update_transfer(transfer_id, transfer_quantity=None, from_location=None, to_
         transfer.from_location = from_location
     if to_location is not None:
         transfer.to_location = to_location
+    if status is not None:
+        transfer.status = status
     if remarks is not None:
         transfer.remarks = remarks
     db.session.commit()

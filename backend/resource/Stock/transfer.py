@@ -23,9 +23,10 @@ class TransferListResource(Resource):
         transfer_quantity = data.get("transfer_quantity")
         from_location = data.get("from_location")
         to_location = data.get("to_location")
+        status = data.get("status", "pending")
         remarks = data.get("remarks")
 
-        transfer = create_transfer(product_id, transfer_quantity, from_location, to_location, remarks)
+        transfer = create_transfer(product_id, transfer_quantity, from_location, to_location, status, remarks)
         if not transfer:
             return {"message": "Product not found"}, 404
 
@@ -49,9 +50,10 @@ class TransferResource(Resource):
         transfer_quantity = data.get("transfer_quantity")
         from_location = data.get("from_location")
         to_location = data.get("to_location")
+        status = data.get("status")
         remarks = data.get("remarks")
 
-        transfer = update_transfer(transfer_id, transfer_quantity, from_location, to_location, remarks)
+        transfer = update_transfer(transfer_id, transfer_quantity, from_location, to_location, status, remarks)
         if not transfer:
             return {"message": "Transfer not found"}, 404
 
@@ -68,3 +70,12 @@ class TransfersByProductResource(Resource):
     def get(self, product_id):
         transfers = get_transfers_by_product_id(product_id)
         return transfers_schema.dump(transfers), 200
+
+#get transfer by status
+class TransfersByStatusResource(Resource):
+    def get(self, status):
+        transfers = get_transfers_by_status(status)
+        if not transfers:
+            return {"message": "No transfers found with this status"}, 404
+        return transfers_schema.dump(transfers), 200
+

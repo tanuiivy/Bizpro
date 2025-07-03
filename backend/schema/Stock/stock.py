@@ -148,6 +148,7 @@ class ProductTransferSchema(ma.SQLAlchemySchema):
     from_location = ma.auto_field()
     to_location = ma.auto_field()
     remarks = ma.auto_field()
+    status = ma.auto_field()
     created_at = ma.auto_field()
     updated_at = ma.auto_field()
 
