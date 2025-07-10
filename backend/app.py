@@ -3,6 +3,7 @@ from config import Config
 from extensions import db, migrate, bcrypt, jwt, ma, cors
 
 #Models
+from models.Authentication import *
 from models.Supplier import *
 from models.Stock import *
 from models.Customer import *
@@ -22,6 +23,10 @@ def create_app():
     #setup API
     from flask_restful import Api
     api = Api(app)
+
+
+    #authentication resources
+    from resource.Authentication.user import CreateUserResource, SetPasswordResource, LoginResource, ForgotPasswordResource, UserListResource,  DeleteUserResource
 
     #supplier resources
     from resource.Supplier.supplier import SupplierListResource, SupplierResource, SupplierRecentResource
@@ -44,6 +49,13 @@ def create_app():
     from resource.Customer.customerposting import CustomerPostingListResource, CustomerPostingResource, CustomerPostingsByCustomerResource, CustomerPostingsByCompanyResource
     from resource.Customer.payment import CustomerPaymentListResource, CustomerPaymentResource, PaymentsByCustomerResource, PaymentsByCompanyResource
     from resource.Customer.analytics import TotalCustomerRevenueResource, PendingPaymentsResource, TotalPostingsResource, TotalCustomersResource, TopCompanyPerCustomerResource, TopProductPerCustomerResource
+
+    #---------------------------------------Authentication-----------------------------------------------------#
+    api.add_resource(CreateUserResource, "/create_user")
+    api.add_resource(SetPasswordResource, "/set-password/<int:user_id>")
+    api.add_resource(LoginResource, "/login")
+    api.add_resource(ForgotPasswordResource, "/forgot-password")
+    api.add_resource(UserListResource, "/users")
 
     #---------------------------------------Supplier-----------------------------------------------------#
     #supplier endpoints
@@ -126,7 +138,7 @@ def create_app():
     api.add_resource(CustomersPerProductResource, "/analytics/customers_per_product")
 
 
-#---------------------------------------Stock-----------------------------------------------------#
+#---------------------------------------Customer-----------------------------------------------------#
     #customer endpoints
     api.add_resource(CustomerListResource, "/customers")
     api.add_resource(CustomerResource, "/customers/<int:customer_id>")
@@ -141,10 +153,10 @@ def create_app():
     api.add_resource(CustomerPostingsByCompanyResource, "/customer_postings/company/<int:company_id>")
 
     #payment endpoints
-    api.add_resource(CustomerPaymentListResource, "/payments")
-    api.add_resource(CustomerPaymentResource, "/payments/<int:payment_id>")
-    api.add_resource(PaymentsByCustomerResource, "/payments/customer/<int:customer_id>")
-    api.add_resource(PaymentsByCompanyResource, "/payments/company/<int:company_id>")
+    api.add_resource(CustomerPaymentListResource, "/customer_payments")
+    api.add_resource(CustomerPaymentResource, "/customer_payments/<int:customer_payment_id>")
+    api.add_resource(PaymentsByCustomerResource, "/customer_payments/customer/<int:customer_id>")
+    api.add_resource(PaymentsByCompanyResource, "/customer_payments/company/<int:company_id>")
 
     #customer analytics
     api.add_resource(TotalCustomerRevenueResource, "/customer-analytics/total-revenue")

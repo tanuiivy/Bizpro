@@ -4,7 +4,7 @@ class Supplier(db.Model, SerializerMixin):
     __tablename__= 'suppliers'
 
     supplier_id = db.Column(db.Integer, primary_key=True)
-    image_path = db.Column(db.String(255))
+    #image_path = db.Column(db.String(255))
     supplier_name = db.Column(db.String(100), nullable=False)
     supplier_email = db.Column(db.String(100), nullable=False, unique=True)
     supplier_phone = db.Column(db.String(10), nullable=False, unique=True)

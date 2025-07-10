@@ -4,10 +4,24 @@ from models.Supplier import Invoice
 
 #create a new supplier
 def create_supplier(data):
-    #new_supplier = Supplier(**data)
-    db.session.add(data)
+    new_supplier = Supplier(
+        supplier_name=data.get('supplier_name'),
+        supplier_email=data.get('supplier_email'),
+        supplier_phone=data.get('supplier_phone'),
+        supplier_address=data.get('supplier_address'),
+        supplier_balance=data.get('supplier_balance', 0.0),
+        contact_person=data.get('contact_person'),
+        contact_person_no=data.get('contact_person_no'),
+        package_mode=data.get('package_mode'),
+        vat=data.get('vat', False),
+        stock=data.get('stock', False),
+        utility=data.get('utility', False),
+        #image_path=data.get('image_path')
+    )
+    
+    db.session.add(new_supplier)
     db.session.commit()
-    return data
+    return new_supplier
 
 #read- get all suppliers
 def get_all_suppliers():

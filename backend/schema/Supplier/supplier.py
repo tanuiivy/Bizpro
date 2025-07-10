@@ -8,7 +8,7 @@ class SupplierSchema(ma.SQLAlchemySchema):
         load_instance = False
 
     supplier_id = ma.auto_field()
-    image_path = ma.auto_field()
+    #image_path = ma.auto_field()
     supplier_name = ma.auto_field()
     supplier_email = ma.auto_field()
     supplier_phone = ma.auto_field()
